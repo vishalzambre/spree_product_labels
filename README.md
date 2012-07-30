@@ -15,7 +15,7 @@ Installation
 Add the gem to your Gemfile:
 
 ```ruby
-gem 'spree_product_labels', :git => 'git://github.com/eltercero/spree_product_labels'
+gem 'spree_product_labels', :git => 'git://github.com/the-cocktail/spree_product_labels'
 ```
 
 And then run the installer with the migrations.
