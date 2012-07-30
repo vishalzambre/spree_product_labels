@@ -1,0 +1,25 @@
+<table class="index">
+  <thead>
+    <tr data-hook="labels_header">
+      <th><%= t(:name) %></th>
+      <th><%= t(:shape) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% labels.each do |label| %>
+      <tr id="<%= dom_id(label) %>" data-hook="labels_row">
+        <td><%= label.title %></td>
+        <td><span class="<%= label.shape %>" style="background-color:<%=label.color%>"></span></td>
+        <td class="actions">
+          <%= link_to_delete label,
+                            :url => remove_admin_product_label_url(@product, label),
+                            :name => icon('delete') + ' ' + t(:remove) %>
+        </td>
+      </tr>
+    <% end %>
+    <% if labels.empty? %>
+      <tr data-hook="labels_none"><td colspan="3"><%= t(:none) %>.</td></tr>
+    <% end %>
+  </tbody>
+</table>

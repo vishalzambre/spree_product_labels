@@ -1,0 +1,2 @@
+$("#selected-labels").html("<%= escape_javascript(render(:partial => 'label_table', :locals => { :labels => @labels })) %>");
+$("#<%= dom_id @label, :sel %>").hide();

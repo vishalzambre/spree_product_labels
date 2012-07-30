@@ -1,0 +1,26 @@
+<h4><%= t(:available_labels) %></h4>
+<table class="index">
+  <thead>
+    <tr>
+      <th><%= t(:title) %></th>
+      <th><%= t(:shape) %></th>
+      <th><%= t(:action) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @labels.each do |label| %>
+      <tr id="<%= dom_id(label, :sel) %>">
+        <td><%= label.title %></td>
+        <td><span class="<%= label.shape %>" style="background-color:<%=label.color%>"></span></td>
+        <td class="actions">
+          <%= link_to icon(:add) + ' ' + t(:select),
+                            select_admin_product_label_path(@product, label),
+                           :remote => true, :class => 'iconlink' %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @labels.empty? %>
+     <tr><td colspan="3"><%= t(:no_match_found) %>.</td></tr>
+    <% end %>
+  </tbody>
+</table>

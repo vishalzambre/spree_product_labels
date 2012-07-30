@@ -1,0 +1,25 @@
+<div data-hook="admin_label_form_fields">
+  <%= f.field_container :title do %>
+    <%= f.label :title, t(:title) %> <span class="required">*</span><br />
+    <%= f.text_field :title %>
+    <%= f.error_message_on :title %>
+  <% end %>
+
+  <%= f.field_container :shape do %>
+    <%= f.label :shape, t(:shape) %><br />
+    <%= f.select( :shape,
+                  Spree::Label::SHAPES.map{|s| [t(s), s]},
+                  {:include_blank => false},
+                  { 'style' => 'width:200px' }) %>
+    <%= f.error_message_on :shape %>
+  <% end %>
+
+  <%= f.field_container :color do %>
+    <%= f.label :color, t(:color) %><br />
+    <%= f.select( :color,
+                  Spree::Label::COLORS.map{|s| [t(s.first), s.last]},
+                  {:include_blank => false},
+                  { 'style' => 'width:200px' }) %>
+    <%= f.error_message_on :color %>
+  <% end %>
+</div>
