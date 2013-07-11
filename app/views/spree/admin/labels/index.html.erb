@@ -20,7 +20,7 @@
     <tr data-hook="reports_header">
       <th><%= t(:title) %></th>
       <th><%= t(:shape) %></th>
-      <th data-hook="admin_labels_index_header_actions"></th>
+      <th data-hook="admin_labels_index_header_actions" class="actions"></th>
     </tr>
   </thead>
   <tbody>
@@ -28,9 +28,9 @@
 	    <tr data-hook="reports_row">
 	      <td><%= label.title %></td>
 	      <td><span class="<%= label.shape %>" style="background-color:<%=label.color%>"></span></td>
-	      <td data-hook="admin_users_index_row_actions">
-          <%= link_to_edit label, :class => 'edit' %> &nbsp;
-          <%= link_to_delete label %>
+	      <td data-hook="admin_users_index_row_actions" class="actions">
+          <%= link_to_edit label, :no_text => true, :class => 'edit' %> &nbsp;
+          <%= link_to_delete label, :no_text => true %>
         </td>
 	    </tr>
     <% end %>

@@ -3,7 +3,7 @@
     <tr data-hook="labels_header">
       <th><%= t(:name) %></th>
       <th><%= t(:shape) %></th>
-      <th></th>
+      <th class="actions"></th>
     </tr>
   </thead>
   <tbody>
@@ -12,9 +12,7 @@
         <td><%= label.title %></td>
         <td><span class="<%= label.shape %>" style="background-color:<%=label.color%>"></span></td>
         <td class="actions">
-          <%= link_to_delete label,
-                            :url => remove_admin_product_label_url(@product, label),
-                            :name => icon('delete') + ' ' + t(:remove) %>
+          <%= link_to_delete label, :url => remove_admin_product_label_url(@product, label), :no_text => true %>
         </td>
       </tr>
     <% end %>
