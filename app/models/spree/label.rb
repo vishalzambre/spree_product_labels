@@ -1,6 +1,6 @@
 module Spree
   class Label < ActiveRecord::Base
-		has_many :product_labels, :class_name => "Spree::ProductLabel"
+		has_many :product_labels, :class_name => "Spree::ProductLabel", :dependent => :destroy
 		has_many :products, :through => :product_labels
 
 		validates :color, :presence => true
