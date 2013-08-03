@@ -20,19 +20,23 @@
     <tr data-hook="reports_header">
       <th><%= t(:title) %></th>
       <th><%= t(:shape) %></th>
+      <th>Seller</th>
+      <th>Is Approved</th>
       <th data-hook="admin_labels_index_header_actions" class="actions"></th>
     </tr>
   </thead>
   <tbody>
     <% @labels.each do |label| %>
-	    <tr data-hook="reports_row">
-	      <td><%= label.title %></td>
-	      <td><span class="<%= label.shape %>" style="background-color:<%=label.color%>"></span></td>
-	      <td data-hook="admin_users_index_row_actions" class="actions">
-          <%= link_to_edit label, :no_text => true, :class => 'edit' %> &nbsp;
-          <%= link_to_delete label, :no_text => true %>
-        </td>
-	    </tr>
+      <tr data-hook="reports_row">
+        <td><%= label.title %></td>
+        <td><span class="<%= label.shape %>" style="background-color:<%=label.color%>"></span></td>
+        <td><%= label.try(:seller).try(:name) %></td>
+        <td><%= label.is_approved %></td>
+        <td data-hook="admin_users_index_row_actions" class="actions">
+        <%= link_to_edit label, :no_text => true, :class => 'edit' %> &nbsp;
+        <%= link_to_delete label, :no_text => true %>
+      </td>
+      </tr>
     <% end %>
   </tbody>
 </table>

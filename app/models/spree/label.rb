@@ -2,12 +2,13 @@ module Spree
   class Label < ActiveRecord::Base
 		has_many :product_labels, :class_name => "Spree::ProductLabel", :dependent => :destroy
 		has_many :products, :through => :product_labels
+    belongs_to  :seller
 
 		validates :color, :presence => true
 		validates :shape, :presence => true
 		validates :title, :presence => true
 
-		attr_accessible :title, :shape, :color
+		attr_accessible :title, :shape, :color, :seller_id, :is_approved
 
 		SHAPES = ['circle', 'square']
 		COLORS = 	[

@@ -22,8 +22,10 @@ module Spree
           labels.each do |label|
             @labels.push(label.attributes)
           end unless labels.nil?
-
+        else
+          @labels = Spree::Label.order("is_approved")
         end
+        
 				respond_with(@labels) do |format|
 					format.html
           format.json
@@ -36,9 +38,11 @@ module Spree
 			end
 
       def create
-        seller_id = current_spree_user.has_spree_role?("admin") ? params[:seller_id] : current_spree_user.seller.id
-        ap seller_id
-        params[:label].merge!(:seller_id => seller_id)
+        puts "---------------------"
+        puts params[:label][:seller_id]
+        puts params[:label][:is_approved]
+
+        reload_params
         super
       end
 
@@ -86,7 +90,14 @@ module Spree
         end
         render :json => @labels.to_json
       end
-      
+
+      def update
+        unless current_spree_user.has_spree_role?("admin")
+          params[:label].merge!(:is_approved => false)
+        end
+        super
+      end
+
 			private
 
 			def find_all_labels
@@ -96,6 +107,14 @@ module Spree
 			def load_product
 				Product.find_by_permalink! params[:product_id]
 			end
+
+      def reload_params
+        if current_spree_user.has_spree_role?("admin")
+          params[:label].merge!(:seller_id => params[:label][:seller_id], :is_approved => params[:label][:is_approved])
+        else
+          params[:label].merge!(:seller_id => current_spree_user.seller.id, :is_approved => false)
+        end        
+      end
 
 		end
 	end
