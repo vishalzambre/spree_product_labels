@@ -22,4 +22,21 @@
                   { 'style' => 'width:200px' }) %>
     <%= f.error_message_on :color %>
   <% end %>
+
+  <%if current_spree_user.has_spree_role?("admin")%>
+    <%= f.field_container :seller do %>
+      <%= f.label :seller_id, "Seller" %><br />
+      <%= f.select( :seller_id, Spree::Seller.all.map{|s| [s.name, s.id]}, {:include_blank => false},{ 'style' => 'width:200px' }) %>
+      <%= f.error_message_on :seller_id %>
+    <% end %>
+  <%end%>
+      
+  <%if current_spree_user.has_spree_role?("admin")%>
+    <%= f.field_container :is_approved do %>
+      <%= f.label :is_approved, "Is Approved" %><br />
+      <%= f.check_box(:is_approved) %>
+      <%= f.error_message_on :is_approved %>
+    <% end %>
+  <%end%>
+
 </div>
