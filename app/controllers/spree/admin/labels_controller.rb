@@ -8,7 +8,12 @@ module Spree
           search = params[:search]
           if q.present?
             if current_spree_user.has_spree_role?("admin")
-              labels = Spree::Label.where("title like '%#{q}%' || color like '%#{q}%'|| shape like '%#{q}%'")
+              seller_id = params[:seller_id]
+              if seller_id.present?
+                labels = Spree::Label.where("seller_id = #{seller_id} and (title like '%#{q}%' || color like '%#{q}%'|| shape like '%#{q}%')")
+              else
+                labels = Spree::Label.where("title like '%#{q}%' || color like '%#{q}%'|| shape like '%#{q}%'")
+              end
             else
               labels = current_spree_user.seller.labels.where("title like '%#{q}%' || color like '%#{q}%'|| shape like '%#{q}%'")
             end
@@ -38,10 +43,6 @@ module Spree
 			end
 
       def create
-        puts "---------------------"
-        puts params[:label][:seller_id]
-        puts params[:label][:is_approved]
-
         reload_params
         super
       end
